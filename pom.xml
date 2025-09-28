@@ -29,7 +29,13 @@
             <version>6.1.0-M1</version>
             <scope>test</scope>
         </dependency>
-
+        <!-- Session Library -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>4.0.0-M1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
