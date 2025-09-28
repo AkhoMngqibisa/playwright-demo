@@ -20,6 +20,7 @@
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>1.57.0</version>
+            <scope>test</scope>
         </dependency>
         <!-- Test Framework (Junit)-->
         <dependency>
