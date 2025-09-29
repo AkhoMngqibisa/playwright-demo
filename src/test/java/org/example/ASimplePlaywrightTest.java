@@ -8,16 +8,20 @@ import org.junit.jupiter.api.Test;
 
 public class ASimplePlaywrightTest {
 
+    Playwright playwright;
+    Browser browser;
+    Page page;
+
     @Test
     void shouldShowThePageTitle() {
         // Create a Playwright environment
-        Playwright playwright = Playwright.create();
+         playwright = Playwright.create();
 
         // Create a browser
-        Browser browser = playwright.chromium().launch();
+         browser = playwright.chromium().launch();
 
         // Create a page
-        Page page = browser.newPage();
+         page = browser.newPage();
 
         // Navigate to the page
         page.navigate("https://practicesoftwaretesting.com");
@@ -32,9 +36,9 @@ public class ASimplePlaywrightTest {
 
     @Test
     void shouldSearchByKeyword() {
-        Playwright playwright = Playwright.create();
-        Browser browser = playwright.chromium().launch();
-        Page page = browser.newPage();
+        playwright = Playwright.create();
+        browser = playwright.chromium().launch();
+        page = browser.newPage();
 
         page.navigate("https://practicesoftwaretesting.com");
         page.locator("[placeholder=Search]").fill("Pliers");
