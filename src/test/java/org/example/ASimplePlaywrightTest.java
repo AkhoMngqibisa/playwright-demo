@@ -4,6 +4,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ASimplePlaywrightTest {
@@ -12,17 +13,18 @@ public class ASimplePlaywrightTest {
     Browser browser;
     Page page;
 
+    @BeforeEach
+    void setUp() {
+        // Create a Playwright environment
+        playwright = Playwright.create();
+        // Create a browser
+        browser = playwright.chromium().launch();
+        // Create a page
+        page = browser.newPage();
+    }
+
     @Test
     void shouldShowThePageTitle() {
-        // Create a Playwright environment
-         playwright = Playwright.create();
-
-        // Create a browser
-         browser = playwright.chromium().launch();
-
-        // Create a page
-         page = browser.newPage();
-
         // Navigate to the page
         page.navigate("https://practicesoftwaretesting.com");
 
@@ -36,10 +38,6 @@ public class ASimplePlaywrightTest {
 
     @Test
     void shouldSearchByKeyword() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch();
-        page = browser.newPage();
-
         page.navigate("https://practicesoftwaretesting.com");
         page.locator("[placeholder=Search]").fill("Pliers");
         page.locator("button:has-text('Search')").click();
