@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.junit.UsePlaywright;
@@ -21,7 +22,10 @@ public class ASimplePlaywrightTest {
         // Create a Playwright environment
         playwright = Playwright.create();
         // Create a browser
-        browser = playwright.chromium().launch();
+        browser = playwright.chromium().launch(
+                new BrowserType.LaunchOptions()
+                        .setHeadless(false)
+        );
         // Create a page
         page = browser.newPage();
     }
