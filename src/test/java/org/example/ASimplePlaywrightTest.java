@@ -1,34 +1,39 @@
 package org.example;
 
-import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.junit.Options;
-import com.microsoft.playwright.junit.OptionsFactory;
+import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.junit.UsePlaywright;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-@UsePlaywright(ASimplePlaywrightTest.CustomOptions.class)
+@UsePlaywright
 public class ASimplePlaywrightTest {
 
-    public class CustomOptions implements OptionsFactory {
+    Playwright playwright;
+    Browser browser;
+    Page page;
 
-        @Override
-        public Options getOptions() {
-            return new Options()
-                    .setHeadless(false)
-                    .setLaunchOptions(
-                            new BrowserType.LaunchOptions()
-                                    .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu","--disable-extensions"))
-                    );
-        };
+    @BeforeEach
+    void setup() {
+        // Create a Playwright environment
+        playwright = Playwright.create();
+        // Create a browser
+        browser = playwright.chromium().launch();
+        // Create a page
+        page = browser.newPage();
     }
 
+    @AfterEach
+    void teardown() {
+        browser.close();
+        playwright.close();
+    }
 
     @Test
-    void shouldShowThePageTitle(Page page) {
+    void shouldShowThePageTitle() {
         // Navigate to the page
         page.navigate("https://practicesoftwaretesting.com");
 
@@ -40,7 +45,7 @@ public class ASimplePlaywrightTest {
     }
 
     @Test
-    void shouldSearchByKeyword(Page page) {
+    void shouldSearchByKeyword() {
         page.navigate("https://practicesoftwaretesting.com");
         page.locator("[placeholder=Search]").fill("Pliers");
         page.locator("button:has-text('Search')").click();
