@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 @UsePlaywright
 public class ASimplePlaywrightTest {
 
@@ -25,6 +27,7 @@ public class ASimplePlaywrightTest {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
+                        .setArgs(Arrays.asList("--no-sandbox","--disable-extensions","--disable-gpu"))
         );
         // Create a page
         page = browser.newPage();
