@@ -1,11 +1,14 @@
 package org.example;
 
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.junit.Options;
 import com.microsoft.playwright.junit.OptionsFactory;
 import com.microsoft.playwright.junit.UsePlaywright;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 @UsePlaywright(AnAnnotatedPlaywrightTest.MyOptions.class)
 public class AnAnnotatedPlaywrightTest {
@@ -14,7 +17,12 @@ public class AnAnnotatedPlaywrightTest {
 
         @Override
         public Options getOptions() {
-            return null;
+            return new Options()
+                    .setHeadless(false)
+                    .setLaunchOptions(
+                            new BrowserType.LaunchOptions()
+                                    .setArgs(Arrays.asList("--no-sandbox","--disable-gpu","--disable-extensions"))
+                    );
         }
     }
 
