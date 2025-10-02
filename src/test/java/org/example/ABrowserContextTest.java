@@ -2,10 +2,7 @@ package org.example;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
@@ -17,18 +14,15 @@ public class ABrowserContextTest {
     private static BrowserContext browserContext;
     Page page;
 
-    @BeforeEach
-    void setup() {
-        // Create a Playwright environment
+    @BeforeAll
+    public static void setupBrowser() {
         playwright = Playwright.create();
-        // Create a browser
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
                         .setArgs(Arrays.asList("--no-sandbox","--disable-extensions","--disable-gpu"))
         );
-        // Create a page
-        page = browser.newPage();
+        browserContext = browser.newContext();
     }
 
     @AfterEach
