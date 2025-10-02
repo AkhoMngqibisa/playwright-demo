@@ -25,6 +25,11 @@ public class ABrowserContextTest {
         browserContext = browser.newContext();
     }
 
+    @BeforeEach
+    public void setUp() {
+        page = browserContext.newPage();
+    }
+
     @AfterEach
     void teardown() {
         browser.close();
