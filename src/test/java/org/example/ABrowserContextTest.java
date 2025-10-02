@@ -1,9 +1,6 @@
 package org.example;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -15,8 +12,9 @@ import java.util.Arrays;
 @UsePlaywright
 public class ABrowserContextTest {
 
-    Playwright playwright;
-    Browser browser;
+    private static Playwright playwright;
+    private static Browser browser;
+    private static BrowserContext browserContext;
     Page page;
 
     @BeforeEach
