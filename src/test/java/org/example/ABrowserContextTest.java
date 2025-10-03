@@ -1,12 +1,11 @@
 package org.example;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.junit.UsePlaywright;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
-@UsePlaywright
+
 public class ABrowserContextTest {
 
     private static Playwright playwright;
@@ -30,8 +29,8 @@ public class ABrowserContextTest {
         page = browserContext.newPage();
     }
 
-    @AfterEach
-    void teardown() {
+    @AfterAll
+    public static void teardown() {
         browser.close();
         playwright.close();
     }
