@@ -1,9 +1,9 @@
 package org.example;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
+import org.junit.jupiter.api.BeforeAll;
+
+import java.util.Arrays;
 
 public class PlaywrightLocatorsTest {
     protected static Playwright playwright;
@@ -11,4 +11,14 @@ public class PlaywrightLocatorsTest {
     protected static BrowserContext browserContext;
 
     Page page;
+
+    @BeforeAll
+    public static void setupBrowser() {
+        playwright = Playwright.create();
+        browser = playwright.chromium().launch(
+                new BrowserType.LaunchOptions()
+                        .setHeadless(false)
+                        .setArgs(Arrays.asList("--no-sandbox","--disable-gpu","--disable-extensions"))
+        );
+    }
 }
