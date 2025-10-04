@@ -35,4 +35,10 @@ public class PlaywrightLocatorsTest {
      void closeContext() {
         browserContext.close();
     }
+
+    @AfterAll
+    public static void tearDown() {
+        browser.close();
+        playwright.close();
+    }
 }
