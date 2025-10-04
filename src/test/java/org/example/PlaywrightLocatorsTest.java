@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -27,5 +28,10 @@ public class PlaywrightLocatorsTest {
     void setup() {
         browserContext = browser.newContext();
         page = browserContext.newPage();
+    }
+
+    @AfterAll
+    public static void closeContext() {
+        browserContext.close();
     }
 }
