@@ -39,6 +39,10 @@ public class PlaywrightLocatorsTest {
         playwright.close();
     }
 
+    private void openPage() {
+        page.navigate("https://practicesoftwaretesting.com");
+    }
+
     @DisplayName("Locating elements by text")
     @Nested
     class LocatingElementsByText {
