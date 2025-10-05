@@ -66,5 +66,11 @@ public class PlaywrightLocatorsTest {
             page.getByAltText("Combination Pliers").click();
             PlaywrightAssertions.assertThat(page.getByText("ForgeFlex Tools")).isVisible();
         }
+
+        @DisplayName("Locate ab element by title")
+        @Test
+        void byTitle() {
+            page.getByTitle("Practice Software Testing - Toolshop").click();
+        }
     }
 }
