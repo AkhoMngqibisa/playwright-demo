@@ -47,5 +47,9 @@ public class PlaywrightLocatorsTest {
     @Nested
     class LocatingElementsByText {
 
+        @BeforeEach
+        void openTheCatalogPage() {
+            openPage();
+        }
     }
 }
