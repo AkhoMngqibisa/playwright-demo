@@ -53,11 +53,18 @@ public class PlaywrightLocatorsTest {
             openPage();
         }
 
-        @DisplayName("Locating an element by test contents")
+        @DisplayName("Locating an element by text contents")
         @Test
         void byText() {
             page.getByText("Bolt Cutters").click();
             PlaywrightAssertions.assertThat(page.getByText("MightyCraft Hardware")).isVisible();
+        }
+
+        @DisplayName("Locating an element by alt contents")
+        @Test
+        void byAltText() {
+            page.getByAltText("Combination Pliers").click();
+            PlaywrightAssertions.assertThat(page.getByText("ForgeFlex Tools")).isVisible();
         }
     }
 }
