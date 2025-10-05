@@ -73,4 +73,10 @@ public class PlaywrightLocatorsTest {
             page.getByTitle("Practice Software Testing - Toolshop").click();
         }
     }
+
+    @DisplayName("Locate elements by placeholders and labels")
+    @Nested
+    class LocatingElementsByPlaceholdersAndLabels {
+
+    }
 }
