@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
@@ -50,6 +51,13 @@ public class PlaywrightLocatorsTest {
         @BeforeEach
         void openTheCatalogPage() {
             openPage();
+        }
+
+        @DisplayName("Locating an element by test contents")
+        @Test
+        void byText() {
+            page.getByText("Bolt Cutters").click();
+            PlaywrightAssertions.assertThat(page.getByText("MightyCraft Hardware")).isVisible();
         }
     }
 }
