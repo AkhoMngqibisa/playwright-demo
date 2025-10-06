@@ -81,5 +81,12 @@ public class PlaywrightLocatorsTest {
         void openTheCataloguePage() {
             openPage();
         }
+
+        @DisplayName("Locate an element by a placeholder")
+        @Test
+        void byPlaceholder() {
+            page.getByPlaceholder("Search").fill("Pliers");
+            PlaywrightAssertions.assertThat(page.getByPlaceholder("Search")).isVisible();
+        }
     }
 }
