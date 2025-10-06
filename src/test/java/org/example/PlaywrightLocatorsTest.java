@@ -88,5 +88,12 @@ public class PlaywrightLocatorsTest {
             page.getByPlaceholder("Search").fill("Pliers");
             PlaywrightAssertions.assertThat(page.getByPlaceholder("Search")).isVisible();
         }
+
+        @DisplayName("Locate an element by a label")
+        @Test
+        void byLabel() {
+            page.getByLabel("Search").fill("Akhona");
+            PlaywrightAssertions.assertThat(page.getByLabel("Search")).isVisible();
+        }
     }
 }
