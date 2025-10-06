@@ -67,7 +67,7 @@ public class PlaywrightLocatorsTest {
             PlaywrightAssertions.assertThat(page.getByText("ForgeFlex Tools")).isVisible();
         }
 
-        @DisplayName("Locate ab element by title")
+        @DisplayName("Locate an element by title")
         @Test
         void byTitle() {
             page.getByTitle("Practice Software Testing - Toolshop").click();
@@ -77,6 +77,9 @@ public class PlaywrightLocatorsTest {
     @DisplayName("Locate elements by placeholders and labels")
     @Nested
     class LocatingElementsByPlaceholdersAndLabels {
-
+        @BeforeEach
+        void openTheCataloguePage() {
+            openPage();
+        }
     }
 }
