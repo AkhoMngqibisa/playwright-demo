@@ -20,7 +20,7 @@ public class PlaywrightLocatorsTest {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setArgs(Arrays.asList("--no-sandbox","--disable-gpu","--disable-extensions"))
+                        .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "--disable-extensions"))
         );
     }
 
@@ -31,7 +31,7 @@ public class PlaywrightLocatorsTest {
     }
 
     @AfterEach
-     void closeContext() {
+    void closeContext() {
         browserContext.close();
     }
 
@@ -109,7 +109,7 @@ public class PlaywrightLocatorsTest {
         @DisplayName("Locate element by button")
         @Test
         void byButton() {
-            page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Categories")).click();
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Categories")).click();
             PlaywrightAssertions.assertThat(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Categories"))).isVisible();
         }
 
@@ -123,6 +123,15 @@ public class PlaywrightLocatorsTest {
         @Test
         void byHeaderLevel() {
             PlaywrightAssertions.assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Price Range").setLevel(4))).isVisible();
+        }
+
+        @DisplayName("Locate element by checkbox")
+        @Test
+        void byCheckbox() {
+            Locator hammerCheckbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("Hammer"));
+            hammerCheckbox.check();
+
+            PlaywrightAssertions.assertThat(hammerCheckbox).isChecked();
         }
 
     }
