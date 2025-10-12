@@ -96,4 +96,13 @@ public class PlaywrightLocatorsTest {
             PlaywrightAssertions.assertThat(page.getByLabel("Search")).isVisible();
         }
     }
+
+    @DisplayName("Locate elements by role")
+    @Nested
+    class LocatingElementsByRole {
+        @BeforeEach
+        void openTheCataloguePage() {
+            openPage();
+        }
+    }
 }
