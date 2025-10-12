@@ -2,6 +2,7 @@ package org.example;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
@@ -104,5 +105,13 @@ public class PlaywrightLocatorsTest {
         void openTheCataloguePage() {
             openPage();
         }
+
+        @DisplayName("Locate element by button")
+        @Test
+        void byButton() {
+            page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Categories")).click();
+            PlaywrightAssertions.assertThat(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Categories"))).isVisible();
+        }
+
     }
 }
