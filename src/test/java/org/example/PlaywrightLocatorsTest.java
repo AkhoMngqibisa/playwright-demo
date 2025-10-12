@@ -115,8 +115,14 @@ public class PlaywrightLocatorsTest {
 
         @DisplayName("Locate element by heading")
         @Test
-        void byHeaderRole() {
+        void byHeader() {
             PlaywrightAssertions.assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Price Range"))).isVisible();
+        }
+
+        @DisplayName("Locate element by heading level")
+        @Test
+        void byHeaderLevel() {
+            PlaywrightAssertions.assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Price Range").setLevel(4))).isVisible();
         }
 
     }
