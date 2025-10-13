@@ -140,5 +140,20 @@ public class PlaywrightLocatorsTest {
     @Nested
     class LocatingElementsByTestID {
 
+        @BeforeAll
+        static void setTestId() {
+            playwright.selectors().setTestIdAttribute("data-test");
+        }
+
+        @BeforeEach
+        void openTheCataloguePage() {
+            openPage();
+        }
+
+        @DisplayName("Locate element using data-test field")
+        @Test
+        void byTestId() {
+            PlaywrightAssertions.assertThat(page.getByTestId("search-submit")).isVisible();
+        }
     }
 }
