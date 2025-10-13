@@ -45,7 +45,7 @@ public class PlaywrightLocatorsTest {
         page.navigate("https://practicesoftwaretesting.com");
     }
 
-    @DisplayName("Locating elements by text")
+    @DisplayName("Locate elements by text")
     @Nested
     class LocatingElementsByText {
 
@@ -133,6 +133,12 @@ public class PlaywrightLocatorsTest {
 
             PlaywrightAssertions.assertThat(hammerCheckbox).isChecked();
         }
+
+    }
+
+    @DisplayName("Locate elements by test Id")
+    @Nested
+    class LocatingElementsByTestID {
 
     }
 }
