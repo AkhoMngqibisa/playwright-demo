@@ -6,6 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class PlaywrightLocatorsTest {
     protected static Playwright playwright;
@@ -172,6 +173,16 @@ public class PlaywrightLocatorsTest {
             // Locate the first name element by Id
             page.locator("#first_name").fill("Akhona Mngqibisa");
             PlaywrightAssertions.assertThat(page.locator("#first_name")).hasValue("Akhona Mngqibisa");
+        }
+
+        @DisplayName("By CSS class")
+        @Test
+        void byCSSClass() {
+            page.locator("#first_name").fill("Akhona Mngqibisa");
+            page.locator(".btnSubmit").click();
+
+            List<String> alertMessage = page.locator(".alert").allTextContents();
+            Assertions.assertFalse(alertMessage.isEmpty());
         }
     }
 }
