@@ -156,4 +156,9 @@ public class PlaywrightLocatorsTest {
             PlaywrightAssertions.assertThat(page.getByTestId("search-submit")).isVisible();
         }
     }
+
+    @DisplayName("Locate elements by css")
+    @Nested
+    class LocatingElementsByCSS {
+    }
 }
