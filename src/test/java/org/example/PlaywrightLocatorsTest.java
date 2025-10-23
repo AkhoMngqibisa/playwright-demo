@@ -184,5 +184,12 @@ public class PlaywrightLocatorsTest {
             List<String> alertMessage = page.locator(".alert").allTextContents();
             Assertions.assertFalse(alertMessage.isEmpty());
         }
+
+        @DisplayName("By attribute")
+        @Test
+        void byAttribute() {
+            page.locator("input[placeholder='Your last name *']").fill("Mngqibisa");
+            PlaywrightAssertions.assertThat(page.locator("#last_name")).hasValue("Mngqibisa");
+        }
     }
 }
