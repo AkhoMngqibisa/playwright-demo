@@ -165,5 +165,13 @@ public class PlaywrightLocatorsTest {
         void openTheContactPage() {
             page.navigate("https://practicesoftwaretesting.com/contact");
         }
+
+        @DisplayName("By Id")
+        @Test
+        void byId() {
+            // Locate the first name element by Id
+            page.locator("#first_name").fill("Akhona Mngqibisa");
+            PlaywrightAssertions.assertThat(page.locator("#first_name")).hasValue("Akhona Mngqibisa");
+        }
     }
 }
