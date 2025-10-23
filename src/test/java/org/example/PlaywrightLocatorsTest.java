@@ -160,5 +160,10 @@ public class PlaywrightLocatorsTest {
     @DisplayName("Locate elements by css")
     @Nested
     class LocatingElementsByCSS {
+
+        @BeforeEach
+        void openTheContactPage() {
+            page.navigate("https://practicesoftwaretesting.com/contact");
+        }
     }
 }
