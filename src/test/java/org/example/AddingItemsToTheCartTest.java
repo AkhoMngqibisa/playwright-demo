@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,5 +33,11 @@ public class AddingItemsToTheCartTest {
     @AfterEach
     void closeContext() {
         browserContext.close();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        browser.close();
+        playwright.close();
     }
 }
