@@ -61,6 +61,6 @@ public class AddingItemsToTheCartTest {
                 .getByTestId("product-name");
 
         assertThat(outOfStockItem).hasCount(1);
-
+        assertThat(outOfStockItem).hasText("Long Nose Pliers");
     }
 }
