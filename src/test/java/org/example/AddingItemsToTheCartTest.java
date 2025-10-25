@@ -60,5 +60,7 @@ public class AddingItemsToTheCartTest {
                 .filter(new Locator.FilterOptions().setHasText("Out of Stock"))
                 .getByTestId("product-name");
 
+        assertThat(outOfStockItem).hasCount(1);
+
     }
 }
