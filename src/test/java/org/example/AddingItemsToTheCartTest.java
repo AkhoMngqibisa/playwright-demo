@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import org.assertj.core.api.Assertions;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+@UsePlaywright
 public class AddingItemsToTheCartTest {
     protected static Playwright playwright;
     protected static Browser browser;
