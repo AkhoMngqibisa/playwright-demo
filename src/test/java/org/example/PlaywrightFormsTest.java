@@ -5,6 +5,8 @@ import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PlaywrightFormsTest {
     protected static Playwright playwright;
     protected static Browser browser;
@@ -34,8 +36,8 @@ public class PlaywrightFormsTest {
 
     @AfterAll
     static void tearDownBrowser() {
-        playwright.close();
         browser.close();
+        playwright.close();
     }
 
     @DisplayName("Interacting with text fields")
@@ -45,6 +47,16 @@ public class PlaywrightFormsTest {
         @BeforeEach
         void openContactPage() {
             page.navigate("https://practicesoftwaretesting.com/contact");
+        }
+
+        @DisplayName("Input fields")
+        @Test
+        void findValues() {
+            var firstNameField = page.getByLabel("First name");
+
+            firstNameField.fill("Sarah-Jane");
+
+            assertThat(firstNameField).hasValue("Sarah-Jane");
         }
     }
 }
