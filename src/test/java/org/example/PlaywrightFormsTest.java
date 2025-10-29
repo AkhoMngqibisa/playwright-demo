@@ -58,5 +58,28 @@ public class PlaywrightFormsTest {
 
             assertThat(firstNameField).hasValue("Sarah-Jane");
         }
+
+        @DisplayName("Complete the form")
+        @Test
+        void completeForm() {
+            var firstNameField = page.getByLabel("First name");
+            var lastNameField = page.getByLabel("Last name");
+            var emailAddressField = page.getByLabel("Email address");
+            var subjectField = page.getByLabel("Subject");
+            var messageField = page.getByLabel("Message");
+            var attachmentField = page.getByLabel("Attachment");
+
+            firstNameField.fill("Sarah-Jane");
+            lastNameField.fill("Smith");
+            emailAddressField.fill("sjsmith@gmail.com");
+            subjectField.selectOption("Payments");
+            messageField.fill("Hello, world!");
+
+            assertThat(firstNameField).hasValue("Sarah-Jane");
+            assertThat(lastNameField).hasValue("Smith");
+            assertThat(emailAddressField).hasValue("sjsmith@gmail.com");
+            assertThat(subjectField).hasValue("payments");
+            assertThat(messageField).hasValue("Hello, world!");
+        }
     }
 }
