@@ -42,5 +42,9 @@ public class PlaywrightFormsTest {
     @Nested
     class WhenInteractingWithTextFields {
 
+        @BeforeEach
+        void openContactPage() {
+            page.navigate("https://practicesoftwaretesting.com/contact");
+        }
     }
 }
