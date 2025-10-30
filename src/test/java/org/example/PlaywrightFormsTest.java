@@ -3,6 +3,8 @@ package org.example;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -94,8 +96,9 @@ public class PlaywrightFormsTest {
         }
 
         @DisplayName("Mandatory fields")
-        @Test
-        void mandatoryFields() {
+        @ParameterizedTest
+        @ValueSource(strings = {"First name","Last name","Email Address","Message"})
+        void mandatoryFields(String fieldName) {
             var firstNameField = page.getByLabel("First name");
             var lastNameField = page.getByLabel("Last name");
             var emailAddressField = page.getByLabel("Email address");
@@ -103,12 +106,22 @@ public class PlaywrightFormsTest {
             var messageField = page.getByLabel("Message");
             var sendButton = page.getByText("Send");
 
+            // Fill in the field values
+            firstNameField.fill("Sarah-Jane");
+            lastNameField.fill("Smith");
+            emailAddressField.fill("sjsmith@gmail.com");
+            subjectField.selectOption("Payments");
+            messageField.fill("Hello, world!");
+
+            // Clear one of the fields
+            page.getByLabel(fieldName).clear();
+
             sendButton.click();
 
-            var errorMessage = page.getByRole(AriaRole.ALERT).getByText("First name is required");
+            // Check the error message for that field
+            var errorMessage = page.getByRole(AriaRole.ALERT).getByText(fieldName+" is required");
 
             assertThat(errorMessage).isVisible();
-
         }
 
     }
