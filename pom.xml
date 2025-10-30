@@ -29,6 +29,12 @@
             <version>6.1.0-M1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>6.1.0-M1</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Session Library -->
         <dependency>
             <groupId>org.assertj</groupId>
