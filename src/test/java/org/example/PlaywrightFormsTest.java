@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 
 import java.net.URISyntaxException;
@@ -95,6 +96,19 @@ public class PlaywrightFormsTest {
         @DisplayName("Mandatory fields")
         @Test
         void mandatoryFields() {
+            var firstNameField = page.getByLabel("First name");
+            var lastNameField = page.getByLabel("Last name");
+            var emailAddressField = page.getByLabel("Email address");
+            var subjectField = page.getByLabel("Subject");
+            var messageField = page.getByLabel("Message");
+            var sendButton = page.getByText("Send");
+
+            sendButton.click();
+
+            var errorMessage = page.getByRole(AriaRole.ALERT).getByText("First name is required");
+
+            assertThat(errorMessage).isVisible();
+
         }
 
     }
