@@ -3,6 +3,9 @@ package org.example;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -61,7 +64,7 @@ public class PlaywrightFormsTest {
 
         @DisplayName("Complete the form")
         @Test
-        void completeForm() {
+        void completeForm() throws URISyntaxException {
             var firstNameField = page.getByLabel("First name");
             var lastNameField = page.getByLabel("Last name");
             var emailAddressField = page.getByLabel("Email address");
@@ -75,11 +78,18 @@ public class PlaywrightFormsTest {
             subjectField.selectOption("Payments");
             messageField.fill("Hello, world!");
 
+            Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
+            page.setInputFiles("#attachment", fileToUpload);
+
             assertThat(firstNameField).hasValue("Sarah-Jane");
             assertThat(lastNameField).hasValue("Smith");
             assertThat(emailAddressField).hasValue("sjsmith@gmail.com");
             assertThat(subjectField).hasValue("payments");
             assertThat(messageField).hasValue("Hello, world!");
+
+            String uploadedFile = attachmentField.inputValue();
+            org.assertj.core.api.Assertions.assertThat(uploadedFile).endsWith("File to Upload.txt");
+
         }
     }
 }
