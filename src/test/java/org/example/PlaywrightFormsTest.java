@@ -91,5 +91,11 @@ public class PlaywrightFormsTest {
             org.assertj.core.api.Assertions.assertThat(uploadedFile).endsWith("File to Upload.txt");
 
         }
+
+        @DisplayName("Mandatory fields")
+        @Test
+        void mandatoryFields() {
+        }
+
     }
 }
