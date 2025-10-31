@@ -47,6 +47,12 @@ public class PlaywrightAssertionsTest {
         void openContactPage() {
             page.navigate("https://practicesoftwaretesting.com/contact");
         }
+
+        @DisplayName("Checking the value of a field")
+        @Test
+        void filedValues() {
+
+        }
     }
 
 }
