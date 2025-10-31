@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,51 +14,21 @@ import java.util.Arrays;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+@UsePlaywright(HeadlessChromeOptions.class)
 public class PlaywrightFormsTest {
-    protected static Playwright playwright;
-    protected static Browser browser;
-    protected static BrowserContext browserContext;
-    Page page;
-
-    @BeforeAll
-    static void setUpBrowser() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false)
-                        .setArgs(Arrays.asList("--no-sandbox", "--disable-extensions", "--disable-gpu"))
-        );
-    }
-
-    @BeforeEach
-    void setUpBrowserContext() {
-        browserContext = browser.newContext();
-        page = browser.newPage();
-    }
-
-    @AfterEach
-    void tearDownBrowserContext() {
-        browserContext.close();
-    }
-
-    @AfterAll
-    static void tearDownBrowser() {
-        browser.close();
-        playwright.close();
-    }
 
     @DisplayName("Interacting with text fields")
     @Nested
     class WhenInteractingWithTextFields {
 
         @BeforeEach
-        void openContactPage() {
+        void openContactPage(Page page) {
             page.navigate("https://practicesoftwaretesting.com/contact");
         }
 
         @DisplayName("Input fields")
         @Test
-        void findValues() {
+        void findValues(Page page) {
             var firstNameField = page.getByLabel("First name");
 
             firstNameField.fill("Sarah-Jane");
@@ -67,7 +38,7 @@ public class PlaywrightFormsTest {
 
         @DisplayName("Complete the form")
         @Test
-        void completeForm() throws URISyntaxException {
+        void completeForm(Page page) throws URISyntaxException {
             var firstNameField = page.getByLabel("First name");
             var lastNameField = page.getByLabel("Last name");
             var emailAddressField = page.getByLabel("Email address");
@@ -98,7 +69,7 @@ public class PlaywrightFormsTest {
         @DisplayName("Mandatory fields")
         @ParameterizedTest
         @ValueSource(strings = {"First name","Last name","Email Address","Message"})
-        void mandatoryFields(String fieldName) {
+        void mandatoryFields(String fieldName, Page page) {
             var firstNameField = page.getByLabel("First name");
             var lastNameField = page.getByLabel("Last name");
             var emailAddressField = page.getByLabel("Email address");
