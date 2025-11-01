@@ -49,6 +49,7 @@ public class PlaywrightAssertionsTest {
     @DisplayName("Making assertions about the contents of a field")
     @Nested
     class LocatingElementsUsingCSS {
+
         @BeforeEach
         void openContactPage() {
             page.navigate("https://practicesoftwaretesting.com/contact");
@@ -70,6 +71,10 @@ public class PlaywrightAssertionsTest {
     @Nested
     class MakingAssertionsAboutDataValues {
 
+        @BeforeEach
+        void openHomePage() {
+            page.navigate("https://practicesoftwaretesting.com");
+        }
     }
 
 }
