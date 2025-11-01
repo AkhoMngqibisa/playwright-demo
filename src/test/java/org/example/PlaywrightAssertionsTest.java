@@ -62,4 +62,10 @@ public class PlaywrightAssertionsTest {
         }
     }
 
+    @DisplayName("Making assertions about data values")
+    @Nested
+    class MakingAssertionsAboutDataValues {
+
+    }
+
 }
