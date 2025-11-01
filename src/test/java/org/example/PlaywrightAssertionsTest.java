@@ -74,6 +74,7 @@ public class PlaywrightAssertionsTest {
         @BeforeEach
         void openHomePage() {
             page.navigate("https://practicesoftwaretesting.com");
+            page.waitForCondition(() -> page.getByTestId("product-name").count() > 0);
         }
     }
 
