@@ -5,6 +5,8 @@ import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PlaywrightAssertionsTest {
 
     protected static Playwright playwright;
@@ -51,7 +53,12 @@ public class PlaywrightAssertionsTest {
         @DisplayName("Checking the value of a field")
         @Test
         void filedValues() {
-
+            var firstNameField = page.getByLabel("First Name");
+            firstNameField.fill("John");
+            assertThat(firstNameField).hasValue("John");
+            assertThat(firstNameField).not().isDisabled();
+            assertThat(firstNameField).isVisible();
+            assertThat(firstNameField).isEditable();
         }
     }
 
