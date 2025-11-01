@@ -2,11 +2,14 @@ package org.example;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.*;
 
 import java.util.Arrays;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+
+@Execution(ExecutionMode.SAME_THREAD)
 public class PlaywrightAssertionsTest {
 
     protected static Playwright playwright;
@@ -18,6 +21,7 @@ public class PlaywrightAssertionsTest {
     @BeforeAll
     static void setupBrowser() {
         playwright = Playwright.create();
+        playwright.selectors().setTestIdAttribute("data-test");
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(true)
