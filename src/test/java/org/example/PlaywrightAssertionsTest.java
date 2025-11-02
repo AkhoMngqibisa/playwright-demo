@@ -1,10 +1,12 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -75,6 +77,22 @@ public class PlaywrightAssertionsTest {
         void openHomePage() {
             page.navigate("https://practicesoftwaretesting.com");
             page.waitForCondition(() -> page.getByTestId("product-name").count() > 0);
+        }
+
+        @DisplayName("All the product prices should be correct values")
+        @Test
+        void allProductPricesShouldBeCorrectValues() {
+            List<Double> prices = page.getByTestId("product-price")
+                    .allInnerTexts()
+                    .stream()
+                    .map(price -> Double.parseDouble(price.replace("$", "")))
+                    .toList();
+
+            Assertions.assertThat(prices)
+                    .isNotEmpty()
+                    .allMatch(price -> price > 0)
+                    .doesNotContain(0.0);
+
         }
     }
 
