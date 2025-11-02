@@ -1,11 +1,13 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.LoadState;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -98,7 +100,12 @@ public class PlaywrightAssertionsTest {
         @DisplayName("Should Sort in alphabetic order")
         @Test
         void shouldSortInAlphabeticOrder() {
+            page.getByLabel("Sort").selectOption("Name (A - Z)");
+            page.waitForLoadState(LoadState.NETWORKIDLE);
+            List <String> productNames = page.getByTestId("product-name").allTextContents();
 
+            Assertions.assertThat(productNames).isSortedAccordingTo(Comparator.naturalOrder());
+            Assertions.assertThat(productNames).isSortedAccordingTo(String.CASE_INSENSITIVE_ORDER);
         }
     }
 
