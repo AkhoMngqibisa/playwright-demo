@@ -45,6 +45,7 @@ public class PlaywrightWaitsTest {
 
     void openHomePage() {
         page.navigate("https://practicesoftwaretesting.com");
+        page.waitForSelector("[data-test=product-image]");
     }
 
     @DisplayName("Should show all product names")
