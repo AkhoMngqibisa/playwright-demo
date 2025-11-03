@@ -1,9 +1,11 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class PlaywrightWaitsTest {
 
@@ -42,6 +44,13 @@ public class PlaywrightWaitsTest {
     }
 
     void openHomePage() {
-        page.navigate("https://practicesoftwaretesting.com")
+        page.navigate("https://practicesoftwaretesting.com");
+    }
+
+    @DisplayName("Should show all product names")
+    @Test
+    void shouldShowAllProductNames() {
+        List<String> productNames = page.getByTestId("product-name").allTextContents();
+        Assertions.assertThat(productNames).contains("Pliers", "Bolt Cutters", "Hammer");
     }
 }
