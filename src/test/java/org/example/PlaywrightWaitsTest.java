@@ -27,6 +27,7 @@ public class PlaywrightWaitsTest {
     void setup() {
         browserContext = browser.newContext();
         page = browser.newPage();
+        openHomePage();
     }
 
     @AfterAll
@@ -38,5 +39,9 @@ public class PlaywrightWaitsTest {
     @AfterEach
     void tearDown() {
         browserContext.close();
+    }
+
+    void openHomePage() {
+        page.navigate("https://practicesoftwaretesting.com")
     }
 }
