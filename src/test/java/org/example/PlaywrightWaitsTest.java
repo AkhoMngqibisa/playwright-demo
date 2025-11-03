@@ -45,13 +45,13 @@ public class PlaywrightWaitsTest {
 
     void openHomePage() {
         page.navigate("https://practicesoftwaretesting.com");
-        page.waitForSelector("[data-test=product-image]");
+        page.waitForSelector(".card-img-top");
     }
 
     @DisplayName("Should show all product names")
     @Test
     void shouldShowAllProductNames() {
-        List<String> productNames = page.getByTestId("product-name").allTextContents();
+        List<String> productNames = page.getByTestId("product-name").allInnerTexts();
         Assertions.assertThat(productNames).contains("Pliers", "Bolt Cutters", "Hammer");
     }
 
