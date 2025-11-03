@@ -53,4 +53,15 @@ public class PlaywrightWaitsTest {
         List<String> productNames = page.getByTestId("product-name").allTextContents();
         Assertions.assertThat(productNames).contains("Pliers", "Bolt Cutters", "Hammer");
     }
+
+    @DisplayName("Should show all product images")
+    @Test
+    void shouldShowAllProductImages() {
+        List <String> productImages = page.locator(".card-img-top").all()
+                .stream()
+                .map(img -> img.getAttribute("alt"))
+                .toList();
+
+        Assertions.assertThat(productImages).contains("Pliers", "Bolt Cutters", "Hammer");
+    }
 }
