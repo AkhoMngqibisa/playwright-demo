@@ -29,7 +29,6 @@ public class PlaywrightWaitsTest {
     void setup() {
         browserContext = browser.newContext();
         page = browser.newPage();
-        openHomePage();
     }
 
     @AfterAll
@@ -45,7 +44,9 @@ public class PlaywrightWaitsTest {
 
     @DisplayName("Waiting for state")
     @Nested
-    class WaitingForState() {
+    class WaitingForState {
+
+        @BeforeEach
         void openHomePage() {
             page.navigate("https://practicesoftwaretesting.com");
             page.waitForSelector(".card-img-top");
@@ -68,7 +69,6 @@ public class PlaywrightWaitsTest {
 
             Assertions.assertThat(productImages).contains("Pliers", "Bolt Cutters", "Hammer");
         }
-
     }
 
 }
