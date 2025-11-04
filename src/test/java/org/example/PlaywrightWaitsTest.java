@@ -7,6 +7,8 @@ import org.junit.jupiter.api.*;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PlaywrightWaitsTest {
 
     protected static Playwright playwright;
@@ -81,7 +83,12 @@ public class PlaywrightWaitsTest {
 
         @Test
         @DisplayName("Should wait for the filter checkbox options to appear before clicking")
-        void shouldWaitForTheFilterCheckboxes() {}
+        void shouldWaitForTheFilterCheckboxes() {
+            var screwdriverFilter = page.getByLabel(" Screwdriver ");
+            screwdriverFilter.click();
+
+            assertThat(screwdriverFilter).isChecked();
+        }
     }
 
 }
