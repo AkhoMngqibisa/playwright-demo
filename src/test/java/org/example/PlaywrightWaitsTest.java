@@ -78,6 +78,10 @@ public class PlaywrightWaitsTest {
         void openHomePage() {
             page.navigate("https://practicesoftwaretesting.com");
         }
+
+        @Test
+        @DisplayName("Should wait for the filter checkbox options to appear before clicking")
+        void shouldWaitForTheFilterCheckboxes() {}
     }
 
 }
