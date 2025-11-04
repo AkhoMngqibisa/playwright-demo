@@ -43,26 +43,32 @@ public class PlaywrightWaitsTest {
         browserContext.close();
     }
 
-    void openHomePage() {
-        page.navigate("https://practicesoftwaretesting.com");
-        page.waitForSelector(".card-img-top");
+    @DisplayName("Waiting for state")
+    @Nested
+    class WaitingForState() {
+        void openHomePage() {
+            page.navigate("https://practicesoftwaretesting.com");
+            page.waitForSelector(".card-img-top");
+        }
+
+        @DisplayName("Should show all product names")
+        @Test
+        void shouldShowAllProductNames() {
+            List<String> productNames = page.getByTestId("product-name").allInnerTexts();
+            Assertions.assertThat(productNames).contains("Pliers", "Bolt Cutters", "Hammer");
+        }
+
+        @DisplayName("Should show all product images")
+        @Test
+        void shouldShowAllProductImages() {
+            List<String> productImages = page.locator(".card-img-top").all()
+                    .stream()
+                    .map(img -> img.getAttribute("alt"))
+                    .toList();
+
+            Assertions.assertThat(productImages).contains("Pliers", "Bolt Cutters", "Hammer");
+        }
+
     }
 
-    @DisplayName("Should show all product names")
-    @Test
-    void shouldShowAllProductNames() {
-        List<String> productNames = page.getByTestId("product-name").allInnerTexts();
-        Assertions.assertThat(productNames).contains("Pliers", "Bolt Cutters", "Hammer");
-    }
-
-    @DisplayName("Should show all product images")
-    @Test
-    void shouldShowAllProductImages() {
-        List <String> productImages = page.locator(".card-img-top").all()
-                .stream()
-                .map(img -> img.getAttribute("alt"))
-                .toList();
-
-        Assertions.assertThat(productImages).contains("Pliers", "Bolt Cutters", "Hammer");
-    }
 }
