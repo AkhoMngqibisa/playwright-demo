@@ -71,4 +71,13 @@ public class PlaywrightWaitsTest {
         }
     }
 
+    @DisplayName("Automatic Waits")
+    @Nested
+    class AutomaticWaits {
+        @BeforeEach
+        void openHomePage() {
+            page.navigate("https://practicesoftwaretesting.com");
+        }
+    }
+
 }
