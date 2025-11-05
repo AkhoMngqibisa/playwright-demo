@@ -1,6 +1,7 @@
 package org.example;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
@@ -93,7 +94,12 @@ public class PlaywrightWaitsTest {
         @DisplayName("Should filter products by category")
         @Test
         void shouldFilterProductsByCategory() {
+            page.getByRole(AriaRole.MENUBAR).getByText("Categories").click();
+            page.getByRole(AriaRole.MENUBAR).getByText("Power Tools").click();
 
+            var filteredProducts = page.getByTestId("product-name").allInnerTexts();
+
+            Assertions.assertThat(filteredProducts).contains("Sheet Sander", "Belt Sender", "Circular Saw");
         }
     }
 
