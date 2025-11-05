@@ -108,4 +108,10 @@ public class PlaywrightWaitsTest {
         }
     }
 
+    @DisplayName("Waiting for elements to Appear and Disappear")
+    @Nested
+    class WaitingForElementsToAppearAndDisappear {
+
+    }
+
 }
