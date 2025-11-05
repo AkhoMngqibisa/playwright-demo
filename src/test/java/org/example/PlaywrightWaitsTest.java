@@ -89,6 +89,12 @@ public class PlaywrightWaitsTest {
 
             assertThat(screwdriverFilter).isChecked();
         }
+
+        @DisplayName("Should filter products by category")
+        @Test
+        void shouldFilterProductsByCategory() {
+
+        }
     }
 
 }
