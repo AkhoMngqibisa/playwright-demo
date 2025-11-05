@@ -99,7 +99,7 @@ public class PlaywrightWaitsTest {
         void shouldFilterProductsByCategory() {
             page.getByRole(AriaRole.MENUBAR).getByText("Categories").click();
             page.getByRole(AriaRole.MENUBAR).getByText("Power Tools").click();
-            page.waitForSelector(".card", new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
+            page.waitForSelector(".card", new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(2000));
 
             var filteredProducts = page.getByTestId("product-name").allInnerTexts();
 
