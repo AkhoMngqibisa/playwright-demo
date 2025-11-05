@@ -2,6 +2,7 @@ package org.example;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PlaywrightWaitsTest {
 
@@ -21,6 +23,7 @@ public class PlaywrightWaitsTest {
     @BeforeAll
     static void setupBrowser() {
         playwright = Playwright.create();
+        playwright.selectors().setTestIdAttribute("data-test");
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(true)
@@ -96,10 +99,12 @@ public class PlaywrightWaitsTest {
         void shouldFilterProductsByCategory() {
             page.getByRole(AriaRole.MENUBAR).getByText("Categories").click();
             page.getByRole(AriaRole.MENUBAR).getByText("Power Tools").click();
+            page.waitForSelector(".card", new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
 
             var filteredProducts = page.getByTestId("product-name").allInnerTexts();
 
-            Assertions.assertThat(filteredProducts).contains("Sheet Sander", "Belt Sender", "Circular Saw");
+            assertFalse(filteredProducts.isEmpty());
+            Assertions.assertThat(filteredProducts).contains("Sheet Sander", "Belt Sander", "Random Orbit Sander");
         }
     }
 
