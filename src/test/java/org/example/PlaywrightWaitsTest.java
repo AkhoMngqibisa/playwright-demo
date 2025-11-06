@@ -123,7 +123,7 @@ public class PlaywrightWaitsTest {
             page.getByText("Add to cart").click();
 
             assertThat(page.getByRole(AriaRole.ALERT)).isVisible();
-
+            assertThat(page.getByRole(AriaRole.ALERT)).hasText("Product added to shopping cart.");
         }
     }
 
