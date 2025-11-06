@@ -111,7 +111,15 @@ public class PlaywrightWaitsTest {
     @DisplayName("Waiting for elements to Appear and Disappear")
     @Nested
     class WaitingForElementsToAppearAndDisappear {
+        @BeforeEach
+        void openHomePage() {
+            page.navigate("https://practicesoftwaretesting.com");
+        }
 
+        @DisplayName("Should display a toaster message when an item is addd to the cart")
+        @Test
+        void shouldDisplayToasterMessage() {
+        }
     }
 
 }
