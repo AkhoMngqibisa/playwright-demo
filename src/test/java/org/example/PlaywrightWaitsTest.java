@@ -116,9 +116,14 @@ public class PlaywrightWaitsTest {
             page.navigate("https://practicesoftwaretesting.com");
         }
 
-        @DisplayName("Should display a toaster message when an item is addd to the cart")
+        @DisplayName("Should display a toaster message when an item is add to the cart")
         @Test
         void shouldDisplayToasterMessage() {
+            page.getByText("Bolt Cutters").click();
+            page.getByText("Add to cart").click();
+
+            assertThat(page.getByRole(AriaRole.ALERT)).isVisible();
+
         }
     }
 
