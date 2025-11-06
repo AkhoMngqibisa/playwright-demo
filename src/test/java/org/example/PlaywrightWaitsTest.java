@@ -124,6 +124,8 @@ public class PlaywrightWaitsTest {
 
             assertThat(page.getByRole(AriaRole.ALERT)).isVisible();
             assertThat(page.getByRole(AriaRole.ALERT)).hasText("Product added to shopping cart.");
+
+            page.waitForCondition(() -> page.getByRole(AriaRole.ALERT).isHidden());
         }
     }
 
