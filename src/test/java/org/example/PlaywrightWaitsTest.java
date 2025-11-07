@@ -127,6 +127,12 @@ public class PlaywrightWaitsTest {
 
             page.waitForCondition(() -> page.getByRole(AriaRole.ALERT).isHidden());
         }
+
+        @DisplayName("Should update the cart item count")
+        @Test
+        void shouldUpdateTheCartItemCount() {
+
+        }
     }
 
 }
