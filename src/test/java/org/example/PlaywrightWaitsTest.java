@@ -138,4 +138,10 @@ public class PlaywrightWaitsTest {
         }
     }
 
+    @DisplayName("Waiting for API Calls")
+    @Nested
+    class WaitingForAPICalls {
+
+    }
+
 }
