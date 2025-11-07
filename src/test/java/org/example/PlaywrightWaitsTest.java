@@ -131,7 +131,10 @@ public class PlaywrightWaitsTest {
         @DisplayName("Should update the cart item count")
         @Test
         void shouldUpdateTheCartItemCount() {
+            page.getByText("Bolt Cutters").click();
+            page.getByText("Add to cart").click();
 
+            page.waitForCondition(() -> page.getByTestId("cart-quantity").textContent().equals("1"));
         }
     }
 
