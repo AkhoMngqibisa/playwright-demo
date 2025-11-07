@@ -142,6 +142,11 @@ public class PlaywrightWaitsTest {
     @Nested
     class WaitingForAPICalls {
 
+        @DisplayName("Should sort by descending price")
+        @Test
+        void shouldSortByDescendingPrice() {
+
+        }
     }
 
 }
