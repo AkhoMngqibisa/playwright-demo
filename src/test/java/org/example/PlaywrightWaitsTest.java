@@ -145,6 +145,10 @@ public class PlaywrightWaitsTest {
         @DisplayName("Should sort by descending price")
         @Test
         void shouldSortByDescendingPrice() {
+            page.navigate("https://practicesoftwaretesting.com");
+
+            // Sort by descending price
+            page.getByTestId("sort").selectOption("Price (High - Low)");
 
         }
     }
