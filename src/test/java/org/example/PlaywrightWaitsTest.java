@@ -161,6 +161,10 @@ public class PlaywrightWaitsTest {
                     .isSortedAccordingTo(Comparator.reverseOrder());
 
         }
+
+        private static double extractPrice(String price) {
+            return Double.parseDouble(price.replace("$", ""));
+        }
     }
 
 }
