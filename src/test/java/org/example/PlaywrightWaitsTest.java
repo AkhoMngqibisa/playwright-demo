@@ -147,6 +147,7 @@ public class PlaywrightWaitsTest {
 
             // Sort by descending price
             page.getByTestId("sort").selectOption("Price (High - Low)");
+            page.getByTestId("product-price").first().waitFor();
 
             // Find all the prices on the page
             var productsPrices = page.getByTestId("product-price")
