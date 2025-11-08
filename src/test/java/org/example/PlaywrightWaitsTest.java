@@ -150,6 +150,12 @@ public class PlaywrightWaitsTest {
             // Sort by descending price
             page.getByTestId("sort").selectOption("Price (High - Low)");
 
+            // Find all the prices on the page
+            var productsPrices = page.getByTestId("product-price")
+                    .allInnerTexts()
+                    .stream()
+                    .map(WaitingForAPICalls::extractPrice).toList();
+
         }
     }
 
