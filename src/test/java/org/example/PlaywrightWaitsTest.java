@@ -1,13 +1,11 @@
 package org.example;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.WaitForSelectorState;
+import com.microsoft.playwright.options.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -155,6 +153,12 @@ public class PlaywrightWaitsTest {
                     .allInnerTexts()
                     .stream()
                     .map(WaitingForAPICalls::extractPrice).toList();
+
+            // Are the prices in the correct order
+            System.out.println("Product Prices: " + productsPrices);
+            Assertions.assertThat(productsPrices)
+                    .isNotEmpty()
+                    .isSortedAccordingTo(Comparator.reverseOrder());
 
         }
     }
