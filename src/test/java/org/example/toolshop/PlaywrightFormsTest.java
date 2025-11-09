@@ -1,4 +1,4 @@
-package org.example;
+package org.example.toolshop;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 

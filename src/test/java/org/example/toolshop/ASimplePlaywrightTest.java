@@ -1,36 +1,40 @@
-package org.example;
+package org.example.toolshop;
 
-import com.microsoft.playwright.*;
-import org.junit.jupiter.api.*;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.junit.UsePlaywright;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+@UsePlaywright
+public class ASimplePlaywrightTest {
 
-public class ABrowserContextTest {
-
-    private static Playwright playwright;
-    private static Browser browser;
-    private static BrowserContext browserContext;
+    Playwright playwright;
+    Browser browser;
     Page page;
 
-    @BeforeAll
-    public static void setupBrowser() {
+    @BeforeEach
+    void setup() {
+        // Create a Playwright environment
         playwright = Playwright.create();
+        // Create a browser
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
                         .setArgs(Arrays.asList("--no-sandbox","--disable-extensions","--disable-gpu"))
         );
-        browserContext = browser.newContext();
+        // Create a page
+        page = browser.newPage();
     }
 
-    @BeforeEach
-    public void setUp() {
-        page = browserContext.newPage();
-    }
-
-    @AfterAll
-    public static void teardown() {
+    @AfterEach
+    void teardown() {
         browser.close();
         playwright.close();
     }

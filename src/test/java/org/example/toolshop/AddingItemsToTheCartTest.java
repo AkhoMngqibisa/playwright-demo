@@ -3,7 +3,6 @@ package org.example.toolshop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
-import org.example.HeadlessChromeOptions;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import org.assertj.core.api.Assertions;
