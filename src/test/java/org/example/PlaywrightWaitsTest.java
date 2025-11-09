@@ -146,8 +146,10 @@ public class PlaywrightWaitsTest {
             page.navigate("https://practicesoftwaretesting.com");
 
             // Sort by descending price
-            page.getByTestId("sort").selectOption("Price (High - Low)");
-            page.getByTestId("product-price").first().waitFor();
+            page.waitForResponse("**/products?page=0&sort=price**",
+                    () -> {
+                        page.getByTestId("sort").selectOption("Price (High - Low)");
+                    });
 
             // Find all the prices on the page
             var productsPrices = page.getByTestId("product-price")
