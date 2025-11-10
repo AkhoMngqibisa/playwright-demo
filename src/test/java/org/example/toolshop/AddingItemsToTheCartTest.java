@@ -31,4 +31,11 @@ public class AddingItemsToTheCartTest {
         assertThat(outOfStockItem).hasCount(1);
         assertThat(outOfStockItem).hasText("Long Nose Pliers");
     }
+
+    @DisplayName("When there is no matching product")
+    @Test
+    void whenThereIsNoMatchingProduct(Page page) {
+
+    }
+
 }
