@@ -3,6 +3,7 @@ package org.example.toolshop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
+import org.example.toolshop.pageobjects.SearchComponent;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -35,6 +36,7 @@ public class AddingItemsToTheCartTest {
     @DisplayName("When there is no matching product")
     @Test
     void whenThereIsNoMatchingProduct(Page page) {
+        SearchComponent searchComponent = new SearchComponent(page);
 
     }
 
