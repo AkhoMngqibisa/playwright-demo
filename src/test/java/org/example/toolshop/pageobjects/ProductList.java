@@ -20,4 +20,8 @@ public class ProductList {
         page.locator(".card").getByText(productName).click();
     }
 
+    public String getSearchCompletedMessage() {
+        return page.getByTestId("search_completed").textContent();
+    }
+
 }
