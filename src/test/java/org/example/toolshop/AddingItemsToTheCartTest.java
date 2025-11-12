@@ -3,6 +3,7 @@ package org.example.toolshop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
+import org.example.toolshop.pageobjects.ProductList;
 import org.example.toolshop.pageobjects.SearchComponent;
 import org.junit.jupiter.api.*;
 import java.util.List;
@@ -37,6 +38,12 @@ public class AddingItemsToTheCartTest {
     @Test
     void whenThereIsNoMatchingProduct(Page page) {
         SearchComponent searchComponent = new SearchComponent(page);
+        ProductList productList = new ProductList(page);
+        searchComponent.searchBy("unknown");
+
+        var matchingProducts = productList.getProductNames();
+
+        Assertions.assertThat(matchingProducts).isEmpty();
 
     }
 
