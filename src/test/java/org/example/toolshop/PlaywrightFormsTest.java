@@ -25,6 +25,7 @@ public class PlaywrightFormsTest {
 
         @BeforeEach
         void openContactPage(Page page) {
+            contactForm = new ContactForm(page);
             page.navigate("https://practicesoftwaretesting.com/contact");
         }
 
@@ -53,6 +54,8 @@ public class PlaywrightFormsTest {
             emailAddressField.fill("sjsmith@gmail.com");
             subjectField.selectOption("Payments");
             messageField.fill("Hello, world!");
+
+            contactForm.setFirstName("Sarah-Jane");
 
             Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
             page.setInputFiles("#attachment", fileToUpload);

@@ -8,4 +8,8 @@ public class ContactForm {
     public ContactForm(Page page) {
         this.page = page;
     }
+
+    public void setFirstName(String firstName) {
+
+    }
 }
