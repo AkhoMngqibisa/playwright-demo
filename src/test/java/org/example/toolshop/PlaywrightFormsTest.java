@@ -3,6 +3,7 @@ package org.example.toolshop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
+import org.example.toolshop.pageobjects.ContactForm;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,6 +20,8 @@ public class PlaywrightFormsTest {
     @DisplayName("Interacting with text fields")
     @Nested
     class WhenInteractingWithTextFields {
+
+        ContactForm contactForm;
 
         @BeforeEach
         void openContactPage(Page page) {
