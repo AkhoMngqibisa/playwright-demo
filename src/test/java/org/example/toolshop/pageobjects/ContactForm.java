@@ -23,6 +23,22 @@ public class ContactForm {
     }
 
     public void setFirstName(String firstName) {
+        this.firstNameField.fill(firstName);
+    }
 
+    public void setLastName(String lastName) {
+        this.lastNameField.fill(lastName);
+    }
+
+    public void setMessage(String message) {
+        this.messageField.fill(message);
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddressField.fill(emailAddress);
+    }
+
+    public void setSubject(String subject) {
+        this.subjectField.selectOption(subject);
     }
 }
