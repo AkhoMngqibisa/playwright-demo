@@ -49,13 +49,11 @@ public class PlaywrightFormsTest {
             var messageField = page.getByLabel("Message");
             var attachmentField = page.getByLabel("Attachment");
 
-            firstNameField.fill("Sarah-Jane");
-            lastNameField.fill("Smith");
-            emailAddressField.fill("sjsmith@gmail.com");
-            subjectField.selectOption("Payments");
-            messageField.fill("Hello, world!");
-
             contactForm.setFirstName("Sarah-Jane");
+            contactForm.setLastName("Smith");
+            contactForm.setEmailAddress("sjsmith@gmail.com");
+            contactForm.setSubject("Payments");
+            contactForm.setMessage("Hello, world!");
 
             Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
             page.setInputFiles("#attachment", fileToUpload);
