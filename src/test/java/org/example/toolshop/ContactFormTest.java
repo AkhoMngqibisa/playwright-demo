@@ -1,4 +1,77 @@
 package org.example.toolshop;
 
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.junit.UsePlaywright;
+import com.microsoft.playwright.options.AriaRole;
+import org.example.toolshop.pageobjects.ContactForm;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+@UsePlaywright(HeadlessChromeOptions.class)
 public class ContactFormTest {
+
+    @DisplayName("Interacting with text fields")
+    @Nested
+    class WhenInteractingWithTextFields {
+
+        ContactForm contactForm;
+
+        @BeforeEach
+        void openContactPage(Page page) {
+            contactForm = new ContactForm(page);
+            page.navigate("https://practicesoftwaretesting.com/contact");
+        }
+
+        @DisplayName("Complete the form")
+        @Test
+        void completeForm(Page page) throws URISyntaxException {
+            contactForm.setFirstName("Sarah-Jane");
+            contactForm.setLastName("Smith");
+            contactForm.setEmailAddress("sjsmith@gmail.com");
+            contactForm.setSubject("Payments");
+            contactForm.setMessage("Hello, world!");
+
+            Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
+            contactForm.setAttachment(fileToUpload);
+
+            contactForm.submitForm();
+        }
+
+        @DisplayName("Mandatory fields")
+        @ParameterizedTest
+        @ValueSource(strings = {"First name","Last name","Email Address","Message"})
+        void mandatoryFields(String fieldName, Page page) {
+            var firstNameField = page.getByLabel("First name");
+            var lastNameField = page.getByLabel("Last name");
+            var emailAddressField = page.getByLabel("Email address");
+            var subjectField = page.getByLabel("Subject");
+            var messageField = page.getByLabel("Message");
+            var sendButton = page.getByText("Send");
+
+            // Fill in the field values
+            firstNameField.fill("Sarah-Jane");
+            lastNameField.fill("Smith");
+            emailAddressField.fill("sjsmith@gmail.com");
+            subjectField.selectOption("Payments");
+            messageField.fill("Hello, world!");
+
+            // Clear one of the fields
+            page.getByLabel(fieldName).clear();
+
+            sendButton.click();
+
+            // Check the error message for that field
+            var errorMessage = page.getByRole(AriaRole.ALERT).getByText(fieldName+" is required");
+
+            assertThat(errorMessage).isVisible();
+        }
+
+    }
 }
