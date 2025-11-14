@@ -1,8 +1,9 @@
-package org.example.toolshop;
+package org.example.toolshop.catalog;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
+import org.example.toolshop.HeadlessChromeOptions;
 import org.example.toolshop.pageobjects.ProductList;
 import org.example.toolshop.pageobjects.SearchComponent;
 import org.junit.jupiter.api.*;

@@ -1,9 +1,10 @@
-package org.example.toolshop;
+package org.example.toolshop.contact;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
 import org.assertj.core.api.Assertions;
+import org.example.toolshop.HeadlessChromeOptions;
 import org.example.toolshop.pageobjects.ContactForm;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
