@@ -3,6 +3,7 @@ package org.example.toolshop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
+import org.assertj.core.api.Assertions;
 import org.example.toolshop.pageobjects.ContactForm;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,12 +37,14 @@ public class ContactFormTest {
             contactForm.setLastName("Smith");
             contactForm.setEmailAddress("sjsmith@gmail.com");
             contactForm.setSubject("Payments");
-            contactForm.setMessage("Hello, world!");
+            contactForm.setMessage("Hello, I hope you are doing well. I am writing this trying to test the 50 characters");
 
             Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
             contactForm.setAttachment(fileToUpload);
 
             contactForm.submitForm();
+
+            Assertions.assertThat(contactForm.getAlertMessage()).contains("Thanks for your message! We will contact you shortly.");
         }
 
         @DisplayName("Mandatory fields")

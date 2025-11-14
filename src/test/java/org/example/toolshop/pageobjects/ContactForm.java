@@ -2,6 +2,7 @@ package org.example.toolshop.pageobjects;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 import java.nio.file.Path;
 
@@ -52,6 +53,10 @@ public class ContactForm {
 
     public void submitForm() {
         sendButton.click();
+    }
+
+    public String getAlertMessage() {
+        return page.getByRole(AriaRole.ALERT).textContent();
     }
 
 }
