@@ -50,25 +50,20 @@ public class ContactFormTest {
         @DisplayName("Mandatory fields")
         @ParameterizedTest
         @ValueSource(strings = {"First name","Last name","Email Address","Message"})
-        void mandatoryFields(String fieldName, Page page) {
-            var firstNameField = page.getByLabel("First name");
-            var lastNameField = page.getByLabel("Last name");
-            var emailAddressField = page.getByLabel("Email address");
-            var subjectField = page.getByLabel("Subject");
-            var messageField = page.getByLabel("Message");
-            var sendButton = page.getByText("Send");
+        void mandatoryFields(String fieldName, Page page) throws URISyntaxException {
+            contactForm.setFirstName("Sarah-Jane");
+            contactForm.setLastName("Smith");
+            contactForm.setEmailAddress("sjsmith@gmail.com");
+            contactForm.setSubject("Payments");
+            contactForm.setMessage("Hello, I hope you are doing well. I am writing this trying to test the 50 characters");
 
-            // Fill in the field values
-            firstNameField.fill("Sarah-Jane");
-            lastNameField.fill("Smith");
-            emailAddressField.fill("sjsmith@gmail.com");
-            subjectField.selectOption("Payments");
-            messageField.fill("Hello, world!");
+            Path fileToUpload = Paths.get(ClassLoader.getSystemResource("data/File to Upload.txt").toURI());
+            contactForm.setAttachment(fileToUpload);
 
             // Clear one of the fields
             page.getByLabel(fieldName).clear();
 
-            sendButton.click();
+            contactForm.submitForm();
 
             // Check the error message for that field
             var errorMessage = page.getByRole(AriaRole.ALERT).getByText(fieldName+" is required");
