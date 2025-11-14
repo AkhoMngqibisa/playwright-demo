@@ -3,6 +3,8 @@ package org.example.toolshop.pageobjects;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import java.nio.file.Path;
+
 public class ContactForm {
     private final Page page;
     private Locator firstNameField;
@@ -11,6 +13,7 @@ public class ContactForm {
     private Locator subjectField;
     private Locator messageField;
     private Locator attachmentField;
+    private Locator sendButton;
 
     public ContactForm(Page page) {
         this.page = page;
@@ -20,6 +23,7 @@ public class ContactForm {
         this.subjectField = page.getByLabel("Subject");
         this.messageField = page.getByLabel("Message");
         this.attachmentField = page.getByLabel("Attachment");
+        this.sendButton = page.getByText("Send");
     }
 
     public void setFirstName(String firstName) {
@@ -41,4 +45,13 @@ public class ContactForm {
     public void setSubject(String subject) {
         this.subjectField.selectOption(subject);
     }
+
+    public void setAttachment(Path fileToUpload) {
+        page.setInputFiles("#attachment", fileToUpload);
+    }
+
+    public void submitForm() {
+        sendButton.click();
+    }
+
 }
