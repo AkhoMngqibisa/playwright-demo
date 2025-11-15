@@ -1,9 +1,8 @@
 package org.example.toolshop.catalog;
 
 import org.assertj.core.api.Assertions;
-import org.example.toolshop.catalog.pageobjects.ProductList;
-import org.example.toolshop.catalog.pageobjects.SearchComponent;
-import org.example.toolshop1.PlaywrightTestCase;
+import org.example.toolshop.catalog.pageobjects.*;
+import org.example.toolshop.fixtures.PlaywrightTestCase;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 
