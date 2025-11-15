@@ -1,4 +1,4 @@
-package org.example.toolshop;
+package org.example.toolshop1;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.AfterAll;

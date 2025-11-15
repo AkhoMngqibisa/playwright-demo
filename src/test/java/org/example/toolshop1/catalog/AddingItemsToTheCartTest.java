@@ -1,11 +1,11 @@
-package org.example.toolshop.catalog;
+package org.example.toolshop1.catalog;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
-import org.example.toolshop.HeadlessChromeOptions;
-import org.example.toolshop.pageobjects.ProductList;
-import org.example.toolshop.pageobjects.SearchComponent;
+import org.example.toolshop1.HeadlessChromeOptions;
+import org.example.toolshop1.pageobjects.ProductList;
+import org.example.toolshop1.pageobjects.SearchComponent;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import org.assertj.core.api.Assertions;

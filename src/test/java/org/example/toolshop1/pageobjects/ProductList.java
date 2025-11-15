@@ -1,4 +1,4 @@
-package org.example.toolshop.pageobjects;
+package org.example.toolshop1.pageobjects;
 
 import com.microsoft.playwright.Page;
 
