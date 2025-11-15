@@ -1,4 +1,4 @@
-package org.example.toolshop;
+package org.example;
 
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.junit.*;
