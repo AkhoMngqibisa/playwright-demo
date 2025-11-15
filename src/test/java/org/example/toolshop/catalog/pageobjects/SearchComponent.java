@@ -18,7 +18,7 @@ public class SearchComponent {
     }
 
     public void clearSearch() {
-        page.waitForResponse("**/products**", () -> {
+        page.waitForResponse("**/products?page**", () -> {
             page.getByTestId("search-reset").click();
         });
     }
