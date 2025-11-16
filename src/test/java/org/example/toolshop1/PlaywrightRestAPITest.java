@@ -1,11 +1,16 @@
 package org.example.toolshop1;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.microsoft.playwright.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 @Execution(ExecutionMode.SAME_THREAD)
 public class PlaywrightRestAPITest {
@@ -63,6 +68,20 @@ public class PlaywrightRestAPITest {
                         }
                     })
             );
+        }
+
+        static Stream<Product> products() {
+            APIResponse response = requestContext.get("products?page=2");
+            Assertions.assertThat(response.status()).isEqualTo(200);
+
+            JsonObject jsonObject = new Gson().fromJson(response.text(), JsonObject.class);
+            JsonArray data = jsonObject.getAsJsonArray("data");
+
+            return data.asList().stream().map(jsonElement -> {
+                JsonObject productJsonObject = jsonElement.getAsJsonObject();
+                return new Product(productJsonObject.get("name").getAsString(),
+                        productJsonObject.get("price").getAsDouble());
+            });
         }
     }
 }
