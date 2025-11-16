@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 @Execution(ExecutionMode.SAME_THREAD)
 public class PlaywrightRestAPITest {
@@ -20,7 +21,7 @@ public class PlaywrightRestAPITest {
         playwright = Playwright.create();
         playwright.selectors().setTestIdAttribute("data-test");
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false).setArgs(Arrays.asList("--no-sandbox", "--disable-gpu","disable-extensions"))
+                .setHeadless(false).setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "disable-extensions"))
         );
     }
 
@@ -47,6 +48,21 @@ public class PlaywrightRestAPITest {
 
     @Nested
     class MakingAPICalls {
+        record Product(String name, Double price) {
+        }
 
+        private static APIRequestContext requestContext;
+
+        @BeforeAll
+        static void setupRequestContext() {
+            requestContext = playwright.request().newContext(new APIRequest.NewContextOptions()
+                    .setBaseURL("https://api.practicesoftwaretesting.com")
+                    .setExtraHTTPHeaders(new HashMap<>() {
+                        {
+                            put("Accept", "application/json");
+                        }
+                    })
+            );
+        }
     }
 }
