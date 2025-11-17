@@ -33,7 +33,7 @@ public class PlaywrightRestAPITest {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(true)
-                        .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "disable-extensions"))
+                        .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "--disable-extensions"))
         );
     }
 
