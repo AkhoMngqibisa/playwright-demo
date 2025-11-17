@@ -7,10 +7,15 @@ import com.microsoft.playwright.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Execution(ExecutionMode.SAME_THREAD)
 public class PlaywrightRestAPITest {
@@ -25,8 +30,10 @@ public class PlaywrightRestAPITest {
     static void setupBrowser() {
         playwright = Playwright.create();
         playwright.selectors().setTestIdAttribute("data-test");
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false).setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "disable-extensions"))
+        browser = playwright.chromium().launch(
+                new BrowserType.LaunchOptions()
+                        .setHeadless(true)
+                        .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu", "disable-extensions"))
         );
     }
 
@@ -70,8 +77,24 @@ public class PlaywrightRestAPITest {
             );
         }
 
+        @DisplayName("Check presence of known products")
+        @ParameterizedTest(name = "Checking product {0}")
+        @MethodSource("products")
+        void checkKnownProduct(Product product) {
+            page.fill("[placeholder='Search']", product.name);
+            page.click("button:has-text('Search')");
+
+            // Check that the product appears with the correct name and price
+            Locator productCard = page.locator(".card").filter(
+                    new Locator.FilterOptions()
+                            .setHasText(product.name)
+                            .setHasText(Double.toString(product.price))
+            );
+            assertThat(productCard).isVisible();
+        }
+
         static Stream<Product> products() {
-            APIResponse response = requestContext.get("products?page=2");
+            APIResponse response = requestContext.get("/products?page=2");
             Assertions.assertThat(response.status()).isEqualTo(200);
 
             JsonObject jsonObject = new Gson().fromJson(response.text(), JsonObject.class);
