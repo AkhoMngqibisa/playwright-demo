@@ -1,5 +1,7 @@
 package org.example.toolshop;
 
+import net.datafaker.Faker;
+
 public record User(
         String first_name,
         String last_name,
@@ -15,6 +17,19 @@ public record User(
 ) {
 
     public static User randomUser() {
-        return new User()
+        Faker fake = new Faker();
+        return new User(
+                fake.name().firstName(),
+                fake.name().lastName(),
+                fake.address().streetAddress(),
+                fake.address().city(),
+                fake.address().state(),
+                fake.address().country(),
+                fake.address().postcode(),
+                fake.phoneNumber().phoneNumber(),
+                "1990-01-01",
+                "Az123!&xyz",
+                fake.internet().emailAddress()
+        );
     }
 }
